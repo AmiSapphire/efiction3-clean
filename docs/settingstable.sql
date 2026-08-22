@@ -54,7 +54,7 @@ CREATE TABLE `fanfiction_settings` (
   `disablepopups` tinyint(1) NOT NULL default '0',
   `agestatement` tinyint(1) NOT NULL default '0',
   `words` text,
-  `version` varchar(10) NOT NULL default '3.3',
+  `version` varchar(10) NOT NULL default '3.5.9',
   `smtp_host` varchar(200) default NULL,
   `smtp_username` varchar(50) default NULL,
   `smtp_password` varchar(50) default NULL,
