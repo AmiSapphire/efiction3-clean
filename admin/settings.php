@@ -619,20 +619,20 @@ else if(isset($_POST['submit'])) {
 				</select> <a href='#' class='pophelp'>[?]<span>"._HELP_SMTPSECURE."</span></a></td></tr>";
 		$output .= 	write_message(_SMTPOFF);
 	}
-	$output .= "<tr><td colspan='2'><div align='center'><input type='submit' id='submit' class='button' name='submit' value='"._SUBMIT."'></div></form></td></tr></table>";
+	$output .= "<tr><td colspan='2'><div align='center'><br><input type='submit' id='submit' class='button' name='submit' value='"._SUBMIT."'><p></div></form></td></tr></table>";
 	// The SMTP test button lives OUTSIDE the main settings form (nested forms are
 	// invalid HTML). It is its own POST mini-form -- a submit button, not a GET
 	// link -- so the outbound SMTP connection can't be triggered by a plain link
 	// or a browser prefetch. The existing testsmtp handler posts to the same URL.
 	if($sect == "email") {
 		$output .= "<div class='sectionheader'>"._TESTSMTP_HEADER."</div>
-		<ul>
-			<li>
+		<div align='center'>
+			<p>
 				<form method='POST' action='admin.php?action=settings&amp;sect=email' style='display:inline'>
 					<input type='submit' class='button' name='testsmtp' value='"._TESTSMTP."'>
 				</form>
 				<a href='#' class='pophelp'>[?]<span>"._HELP_TESTSMTP."</span></a>
-			</li>
-		</ul>";
+			<p>
+		</div>";
 	}
 ?>
