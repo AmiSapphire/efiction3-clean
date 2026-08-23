@@ -141,7 +141,7 @@ if($add == "series" || ($action == "add" && !$add) || $action == "edit") {
 	}
 	else {
 	$output = "<div id=\"pagetitle\">".($action == "edit" ? _EDITSERIES : ($add == "stories" ? _ADD2SERIES : _ADDSERIES))."</div>
-<form METHOD=\"POST\" style='width: 90%; margin: 0 auto;' name=\"form\" action=\"series.php?action=$action&amp;add=".(!empty($add) ? $add : "series").(!empty($seriesid) ? "&amp;seriesid=$seriesid" : "")."\">";
+<form METHOD=\"POST\" style='width: 75%; margin: 0 auto;' name=\"form\" action=\"series.php?action=$action&amp;add=".(!empty($add) ? $add : "series").(!empty($seriesid) ? "&amp;seriesid=$seriesid" : "")."\">";
 	if($action == "edit" && !isset($POST['submit'])) {
 		$seriesquery = dbquery(_SERIESQUERY." AND seriesid = '$seriesid' LIMIT 1");
 		$series = dbassoc($seriesquery);
