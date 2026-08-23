@@ -310,10 +310,10 @@ else if(isset($_POST['submit'])) {
 		$$var = stripslashes($val );
 	}
 
-	$output .= "<form method='POST' class='tblborder' style='' enctype='multipart/form-data' action='".((isset($action) && $action == "settings") ? "admin.php?action=settings" : $_SERVER['PHP_SELF']."?step=".$_GET['step'])."&amp;sect=$sect'>";
+	$output .= "<br><form method='POST' class='tblborder' style='width: 45%; margin: 0 auto;' enctype='multipart/form-data' action='".((isset($action) && $action == "settings") ? "admin.php?action=settings" : $_SERVER['PHP_SELF']."?step=".$_GET['step'])."&amp;sect=$sect'>";
 	if($sect == "main") {
 		$output .= "<div class='sectionheader'>"._SITEINFO."</div>
-		<table class='acp'>
+		<table class='acp' style='margin: 0 auto;'>
 			<tr>
 				<td><label for='newsitekey'>"._SITEKEY.":</label></td><td><input type='text' class='textbox' name='newsitekey' value='".SITEKEY."'> <a href='#' class='pophelp'>[?]<span>"._HELP_SITEKEY."</span></a></td>
 			</tr>
@@ -356,7 +356,7 @@ else if(isset($_POST['submit'])) {
 	}
 	else if($sect == "submissions") {
 		$output .= "<div class='sectionheader'>"._SUBMISSIONSETTINGS."</div>
-		<table class='acp'>
+		<table class='acp' style='margin: 0 auto;'>
 			<tr>
 				<td><label for='newsubmissionsoff'>"._NOSUBS.":</label></td><td><select name='newsubmissionsoff'>
 				<option value='1'".($submissionsoff == "1" ? " selected" : "").">"._YES."</option>
@@ -396,8 +396,8 @@ else if(isset($_POST['submit'])) {
 			</tr>
 			<tr>
 				<td colspan='2'><fieldset style='margin: 0 auto;'><legend>"._IMAGESIZE." <a href='#' class='pophelp'>[?]<span>"._HELP_IMAGESIZE."</span></a></legend>
-				<label for='newimageheight'>"._MAXHEIGHT.":</label> <input  type='text' class='textbox=' name='newimageheight' value='$imageheight' size='5'> <br />
-				<label for='newimagewidth'>"._MAXWIDTH.":</label> <input  type='text' class='textbox=' name='newimagewidth' value='$imagewidth' size='5'></fieldset></td>
+				<label for='newimageheight'>"._MAXHEIGHT.":</label> <span style='padding-left: 24.3%;'> <input  type='text' class='textbox=' name='newimageheight' value='$imageheight' size='5'> <br />
+				<label for='newimagewidth'>"._MAXWIDTH.":</label> <span style='padding-left: 25.3%;'> <input  type='text' class='textbox=' name='newimagewidth' value='$imagewidth' size='5'></fieldset></td>
 			</tr>
 			<tr>
 				<td><label for='newstore'>"._HOWSTORE.":</label></td><td><select name='newstore' onChange='if (this.disabled) this.selectedIndex=0' disabled>
@@ -409,13 +409,13 @@ else if(isset($_POST['submit'])) {
 				<td><label for='newstoriespath'>"._STORIESPATH.":</label></td><td><input type='text' class='textbox=' name='newstoriespath' value='$storiespath'> <a href='#' class='pophelp'>[?]<span>"._HELP_STORIESPATH."</span></a></td>
 			</tr>
 			<tr>
-				<td colspan='2'><fieldset style='margin: 0 auto;'><legend>"._MAXMINWORDS."<a href='#' class='pophelp'>[?]<span>"._HELP_MINMAXWORDS."</span></a></legend>
-				<label for='newminwords'>"._MIN.":</label> <input  type='text' class='textbox=' name='newminwords' value='$minwords' size='5'> <br />
-				<label for='newmaxwords'>"._MAX.":</label> <input  type='text' class='textbox=' name='newmaxwords' value='$maxwords' size='7'></fieldset></td></tr>";
+				<td colspan='2'><fieldset style='margin: 0 auto;'><legend>"._MAXMINWORDS." <a href='#' class='pophelp'>[?]<span>"._HELP_MINMAXWORDS."</span></a></legend>
+				<label for='newminwords'>"._MIN.":</label> <span style='padding-left: 38.44%;'> <input  type='text' class='textbox=' name='newminwords' value='$minwords' size='5'> <br />
+				<label for='newmaxwords'>"._MAX.":</label> <span style='padding-left: 37.7%;'> <input  type='text' class='textbox=' name='newmaxwords' value='$maxwords' size='7'></fieldset></td></tr>";
 	}
 	else if($sect == "sitesettings") {
 		$output .= "<div class='sectionheader'>"._SITESETTINGS."</div>
-		<table class='acp'>
+		<table class='acp' style='margin: 0 auto;'>
 			<tr>
 				<td><label for='newtinyMCE'>"._USETINYMCE. ": </label></td><td><select name='newtinyMCE'>
 				<option value=\"2\"" . ($tinyMCE == 2 ? " selected" : "") . ">TinyMce4</option>
@@ -475,7 +475,7 @@ else if(isset($_POST['submit'])) {
 				"d.m.y", "Y.m.d", "m.d.Y", "d-m-y", "m-d-y", "M d Y", "M d, Y", "F d Y", "F d, Y");
 		$defaulttimes = array("h:i a", "h:i A", "H:i", "g:i a", "g:i A", "G:i", "h:i:s a", "H:i:s", "g:i:s a", "g:i:s A", "G:i:s");
 		$output .= "<div class='sectionheader'>"._DISPLAYSETTINGS."</div>
-		<table class='acp'>
+		<table class='acp' style='margin: 0 auto;'>
 			<tr>
 				<td><label for='newdateformat'>"._DATEFORMAT.":</label></td><td><select name='newdateformat'><option value=''>"._SELECTONE."</option>";
 		foreach($defaultdates as $date) {
@@ -536,7 +536,7 @@ else if(isset($_POST['submit'])) {
 	}
 	else if($sect == "reviews") {
 		$output .= "<div class='sectionheader'>"._REVIEWSETTINGS."</div>
-		<table class='acp'>
+		<table class='acp' style='margin: 0 auto;'>
 			<tr>
 				<td><label for='newreviewsallowed'>"._ONREVIEWS.":</label></td><td><select name='newreviewsallowed'>
 				<option value='1'".($reviewsallowed == "1" ? " selected" : "").">"._YES."</option>
@@ -572,7 +572,7 @@ else if(isset($_POST['submit'])) {
 	}
 	else if($sect == "useropts") {
 		$output .= "<div class='sectionheader'>"._USERSETTINGS."</div>
-		<table class='acp'>
+		<table class='acp' style='margin: 0 auto;'>
 			<tr>
 				<td><label for='newalertson'>"._ALERTSON.":</label></td><td><select name='newalertson'>
 				<option value='1'".($alertson == "1" ? " selected" : "").">"._YES."</option>
@@ -599,7 +599,7 @@ else if(isset($_POST['submit'])) {
 	}
 	else if($sect == "email") {
 		$output .= "<div class='sectionheader'>"._EMAILSETTINGS."</div>
-		<table class='acp'>
+		<table class='acp' style='margin: 0 auto;'>
 			<tr>
 				<td><label for='newsmtp_host'>"._SMTPHOST.":</label></td><td><input name='newsmtp_host' type='text' value='$smtp_host'> <a href='#' class='pophelp'>[?]<span>"._HELP_SMTPHOST."</span></a></td>
 		</tr>
