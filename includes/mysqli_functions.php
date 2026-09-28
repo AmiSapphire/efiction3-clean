@@ -20,6 +20,7 @@ function dbconnect($dbhost, $dbuser, $dbpass, $dbname ) {
 	}
 	//mysqli_query($mysql_access, "SET SESSION sql_mode = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION'");
 	mysqli_query($mysqli_access, "SET SESSION sql_mode = 'NO_ENGINE_SUBSTITUTION'");
+	mysqli_set_charset($mysqli_access, "utf8");
     mysqli_query($mysqli_access, "SET NAMES UTF8;");
 	return $mysqli_access;
 }
