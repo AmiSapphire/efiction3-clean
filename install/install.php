@@ -697,7 +697,7 @@ CREATE TABLE IF NOT EXISTS `" . $tableprefix . "fanfiction_modules` (
   `version` varchar(10) NOT NULL default '1.0',
   PRIMARY KEY  (`id`),
   KEY `name_version` (`name`,`version`)
-)");
+) ENGINE=MyISAM;");
 				$output .= "<tr><td>" . $tableprefix . "fanfiction_modules</td><td align='center'>" . ($modules ? "<img src=\"../images/check.gif\">" : "<img src=\"../images/X.gif\">") . "</td></tr>";
 				$news = dbquery("CREATE TABLE IF NOT EXISTS `" . $tableprefix . "fanfiction_news` (
   `nid` int(11) NOT NULL auto_increment,
