@@ -847,7 +847,7 @@ CREATE TABLE IF NOT EXISTS `" . $tableprefix . "fanfiction_modules` (
 
 		break;
 
-	case "2";
+	case "2":
 		include("../config.php");
 		if (dbnumrows(dbquery("SHOW TABLES LIKE '" . $settingsprefix . "fanfiction_settings'")))
 		{
