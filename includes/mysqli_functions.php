@@ -19,7 +19,9 @@ function dbconnect($dbhost, $dbuser, $dbpass, $dbname ) {
 		}
 	}
 	//mysqli_query($mysql_access, "SET SESSION sql_mode = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION'");
-	mysqli_query($mysqli_access, "SET SESSION sql_mode = 'NO_ENGINE_SUBSTITUTION'");
+	//mysqli_query($mysqli_access, "SET SESSION sql_mode = 'NO_ENGINE_SUBSTITUTION'");
+	// MariaDB seems to disable ONLY_FULL_GROUP_BY strict mode by default - needed for MySQL 8.0 and above...
+	mysqli_query($mysqli_access, "SET SESSION sql_mode = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION'");
 	mysqli_set_charset($mysqli_access, "utf8");
     mysqli_query($mysqli_access, "SET NAMES UTF8;");
 	return $mysqli_access;
