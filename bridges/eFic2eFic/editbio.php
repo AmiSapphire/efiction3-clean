@@ -45,7 +45,8 @@ function random_string ($charset_string, $length)
 	$uid = isset($_REQUEST['uid']) ? $_REQUEST['uid'] : false;
 	if(!$uid) $uid = USERUID;
 
-	if((!isADMIN || uLEVEL > 2) && $uid != USERUID && $action == "editbio") $output .= write_error(_NOTAUTHORIZED);
+	if($uid && !isNumber($uid)) accessDenied( );
+	if((!isADMIN || uLEVEL > 2) && $uid != USERUID && $action == "editbio") accessDenied( );
 	if(isMEMBER) $output .= "<div id=\"pagetitle\">"._EDITPERSONAL."</div>";
 	else $output .= "<div id=\"pagetitle\">"._NEWACCOUNT."</div>";
 	if(!empty($_POST['submit'])) {
@@ -203,8 +204,8 @@ function random_string ($charset_string, $length)
 			$output .= "<INPUT name=\"newpenname\" type=\"text\" class=\"textbox\" maxlength=\"200\" value=\"".(isset($user) ? $user['penname'] : "")."\"><INPUT name=\"oldpenname\" type=\"hidden\" value=\"".(isset($user) ? $user['penname'] : "")."\"><font color=\"red\">*</font> ";
 		else if(isset($user)) $output .= " ".$user['penname'];
 		$output .= "</div>
-	 	<div><label for='realname'>"._REALNAME.": </label><INPUT type=\"text\" class=\"textbox=\" name=\"realname\" maxlength=\"200\" value=\"".(isset($user) ? $user['realname'] : "")."\"></div>
-	 	<div><label for='email'>"._EMAIL.":</label><INPUT  type=\"text\" class=\"textbox=\" name=\"email\" value=\"".(isset($user) ? $user['email'] : "")."\" maxlength=\"200\" size=\"35\"><font color=\"red\">*</font></div>
+	 	<div><label for='realname'>"._REALNAME.": </label><INPUT type=\"text\" class=\"textbox=\" name=\"realname\" maxlength=\"200\" value=\"".(isset($user) ? htmlspecialchars($user['realname'], ENT_QUOTES) : "")."\"></div>
+	 	<div><label for='email'>"._EMAIL.":</label><INPUT  type=\"text\" class=\"textbox=\" name=\"email\" value=\"".(isset($user) ? htmlspecialchars($user['email'], ENT_QUOTES) : "")."\" maxlength=\"200\" size=\"35\"><font color=\"red\">*</font></div>
 	 	<div><label for='bio'>"._BIO.":</label></div>
 		<div style='width: 450px; margin: 0 auto;'><textarea class=\"textbox\" name=\"bio\" cols=\"50\" rows=\"6\">".(isset($user) ? stripslashes($user['bio']) : "")."</TEXTAREA></div>";
 /* The section adds fields to the form from the authorfields table to the authorinfo table allowing dynamic additions to the bio/registration page */
@@ -236,7 +237,7 @@ function random_string ($charset_string, $length)
 			<div><label for='password2'>"._PASSWORD2.":</label> <INPUT name=\"password2\" class=\"textbox=\" value=\"\" type=\"password\">".($action == "register" ? "<font color=\"red\">*</font>" : "")."</div>";
 		if(!empty($captcha) && $action == "register") $output .= "<div><label for='userdigit'>"._CAPTCHANOTE."</label><input MAXLENGTH=5 SIZE=5 name=\"userdigit\" type=\"text\" value=\"\"><div style='text-align: center;'><img width=120 height=30 src=\""._BASEDIR."includes/button.php\" style=\"border: 1px solid #111;\"></div></div>";
 	 	$output .= "<div style='text-align: center; margin: 1em;'><INPUT type=\"hidden\" name=\"uid\" value=\"".(isset($user) ? $user['uid'] : "")."\"><INPUT type=\"submit\" class=\"button\" name=\"submit\" value=\""._SUBMIT."\">";
-	 	if(!isADMIN)
+	 	if(!isADMIN && $action != "register")
 	 	{
 			 	$output .= " [<a href=\"admin.php?action=members&delete=$uid\">"._DELETE."</a>]";
 	 	}
