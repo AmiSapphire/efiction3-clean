@@ -958,6 +958,7 @@ CREATE TABLE IF NOT EXISTS `" . $tableprefix . "fanfiction_modules` (
   `anonreviews` tinyint(1) NOT NULL default '0',
   `revdelete` tinyint(1) NOT NULL default '0',
   `rateonly` tinyint(1) NOT NULL default '0',
+  `rateguard` tinyint(1) NOT NULL default '0',
   `pwdsetting` tinyint(1) NOT NULL default '0',
   `alertson` tinyint(1) NOT NULL default '0',
   `disablepopups` tinyint(1) NOT NULL default '0',
