@@ -1027,6 +1027,14 @@ CREATE TABLE IF NOT EXISTS `" . $tableprefix . "fanfiction_modules` (
 				if (empty($sitekey)) $sitekey = random_string($randomcharset, 10);
 				$language = $_POST['language'];
 				$settingsprefix = htmlspecialchars(descript($_POST['settingsprefix'], ENT_QUOTES));
+				$settingsprefix = descript($_POST['settingsprefix']);
+				$text = "<?php \n".
+					"\$dbhost = ".var_export(($dbhost), true).";\n".
+					"\$dbname = ".var_export(($dbname), true).";\n".
+					"\$dbuser= ".var_export(($dbuser), true).";\n".
+					"\$dbpass = ".var_export(($dbpass), true).";\n".
+					"\$sitekey = ".var_export(($sitekey), true).";\n".
+					"\$settingsprefix = ".var_export(($settingsprefix), true).";\n\n".
 					"include(\"includes/dbfunctions.php\");\n".
 					"?>";
 
