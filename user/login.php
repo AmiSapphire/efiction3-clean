@@ -71,8 +71,8 @@
 					setcookie($sitekey."_salt", md5($passwd['email'].$encryptedpassword), array('expires' => time()+60*60*24*30, 'path' => "/", 'httponly' => true, 'samesite' => 'Lax'));
 				}
 				else {
-					setcookie($sitekey."_useruid",$passwd['uid'], time()+60*60*24*30, "/");
-					setcookie($sitekey."_salt", md5($passwd['email'].$encryptedpassword), time()+60*60*24*30, "/");
+					setcookie($sitekey."_useruid",$passwd['uid'], time()+60*60*24*30, "/", '', false, true);
+					setcookie($sitekey."_salt", md5($passwd['email'].$encryptedpassword), time()+60*60*24*30, "/", '', false, true);
 				}
 			}
 			// as of CVE-2026-115560, you can no longer set these settings if
