@@ -66,13 +66,14 @@
 		}
 		if($passwd['password'] == $encryptedpassword) {
 			if(isset($_POST['cookiecheck'])) {
+				$securecookiecheck = in_array(strtolower((string)(isset($_SERVER['HTTPS']) ? $_SERVER['HTTPS'] : '')), array('on', '1'), true);
 				if (version_compare(PHP_VERSION, '7.3.0', '>=')) {
-					setcookie($sitekey."_useruid", $passwd['uid'], array('expires' => time()+60*60*24*30, 'path' => "/", 'httponly' => true, 'samesite' => 'Lax'));
-					setcookie($sitekey."_salt", md5($passwd['email'].$encryptedpassword), array('expires' => time()+60*60*24*30, 'path' => "/", 'httponly' => true, 'samesite' => 'Lax'));
+					setcookie($sitekey."_useruid", $passwd['uid'], array('expires' => time()+60*60*24*30, 'path' => "/", 'secure' => $securecookiecheck || (bool)ini_get('session.cookie_secure'), 'httponly' => true, 'samesite' => 'Lax'));
+					setcookie($sitekey."_salt", md5($passwd['email'].$encryptedpassword), array('expires' => time()+60*60*24*30, 'path' => "/", 'secure' => $securecookiecheck || (bool)ini_get('session.cookie_secure'), 'httponly' => true, 'samesite' => 'Lax'));
 				}
 				else {
-					setcookie($sitekey."_useruid",$passwd['uid'], time()+60*60*24*30, "/", '', false, true);
-					setcookie($sitekey."_salt", md5($passwd['email'].$encryptedpassword), time()+60*60*24*30, "/", '', false, true);
+					setcookie($sitekey."_useruid",$passwd['uid'], time()+60*60*24*30, "/", '', $securecookiecheck || (bool)ini_get('session.cookie_secure'), false, true);
+					setcookie($sitekey."_salt", md5($passwd['email'].$encryptedpassword), time()+60*60*24*30, "/", '', $securecookiecheck || (bool)ini_get('session.cookie_secure'), false, true);
 				}
 			}
 			// as of CVE-2026-115560, you can no longer set these settings if
@@ -80,6 +81,22 @@
 			if(!isset($_SESSION)) {
 				$sessionuploadprogress = ini_get('session.upload_progress.enabled');
 				if ($sessionuploadprogress == false) {
+					// we will keep using ini_set here, as setting session cookie params with
+					// cookie lifetime was historically bugged; not sure if it was ever fixed
+					ini_set('session.use_cookies', '1');
+					// messing with this setting in PHP 8.4.0 and newer trips up a deprecation
+					// notice; should be 1 there anyway
+					ini_set('session.use_only_cookies', '1');
+					ini_set('use_strict_mode', 1);
+					// messing with this setting in PHP 8.4.0 and newer trips up a deprecation
+					// notice; should be 0 there anyway
+					ini_set('session.use_trans_sid', '0');
+					//ini_set('session.cookie_lifetime', '0');
+					$securecookiecheck = in_array(strtolower((string)(isset($_SERVER['HTTPS']) ? $_SERVER['HTTPS'] : '')), array('on', '1'), true);
+					if ($securecookiecheck === true)  {
+						ini_set('session.cookie_secure', '1');
+					}
+					else ini_set('session.cookie_secure', '0');
 					ini_set('session.cookie_httponly', '1');
 					if (version_compare(PHP_VERSION, '7.3.0', '>=')) {
 						ini_set('session.cookie_samesite', 'Lax');
